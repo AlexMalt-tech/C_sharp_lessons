@@ -1,25 +1,10 @@
-﻿// Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
-// 0, 7, 8, -2, -2 -> 2
-// 1, -7, 567, 89, 223-> 3
-void Print(int[] collect)
-{
-    for(int el = 0; el < collect.Length; el++)
-    {
-        System.Console.Write($"{collect[el]}, ");
-    }
-}
+﻿// Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; значения b1, k1, b2 и k2 задаются пользователем.
+// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; -0,5)
 
-int count = 6;
-int[] arr = new int[count];
-int zero = 0;
+float y = 0, x = 0;
+float b1 = 2, k1 = 5, b2 = 4, k2 = 9;
 
-for(int i = 0; i < arr.Length; i++)
-{
-    System.Console.Write($"Ведите {i} число: ");
-    arr[i] = int.Parse(Console.ReadLine());
-    if (arr[i] > 0)
-        zero++;
-}
+x = (b2 - b1) / (k1 - k2);
+y = k1 * x + b1;
 
-Print(arr);
-System.Console.WriteLine($" -> {zero}");
+System.Console.WriteLine($"{x}, {y}");
