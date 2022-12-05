@@ -1,33 +1,41 @@
-﻿// Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
-// m = 3, n = 4.
-// 0,5 7 -2 -0,2
-// 1 -3,3 8 -9,9
-// 8 7,8 -7,1 9
+﻿// Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
 
-static double RandomNumber()
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// 17 -> такого числа в массиве нет
+
+static int RandomNumber()
 {
 	Random rnd = new Random();
-	return rnd.Next(-10, 11) + Math.Round((double)rnd.NextDouble(), 1);
+	return rnd.Next(0, 10);
 }
 
-void MakeMatrix(int m, int n)
+int[,] MakeMatrix(int[,] matrix, int m, int n)
 {
-	double[,] matrix = new double[m, n];
-	for(int i = 0; i < 3; i++)
+	
+	for(int i = 0; i < m; i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < n; j++)
 		{	
 			matrix[i, j] = RandomNumber();
 			System.Console.Write($"{matrix[i, j]} ");
-			
 		}
 		System.Console.WriteLine();
 	}
+	return matrix;
 }
 
-int rows = 0, columns = 0;
-System.Console.Write("Введите число строк: ");
-rows = int.Parse(Console.ReadLine());
-System.Console.Write("Введите число столбцов: ");
-columns = int.Parse(Console.ReadLine());
-MakeMatrix(rows, columns);
+int rows = RandomNumber();
+int collumns = RandomNumber();
+int[,] arr = new int[rows, collumns];
+MakeMatrix(arr, rows, collumns); // Создание матрицы
+
+int rowNumber = 3; // Задание строки
+int collNumber = 4; // Задание столбца
+
+if(rowNumber < rows & collNumber < collumns)
+	System.Console.WriteLine(arr[rowNumber, collNumber]);
+else
+	System.Console.WriteLine($"{rowNumber}, {collNumber} -> Такого числа нет.");
