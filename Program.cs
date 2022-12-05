@@ -1,10 +1,9 @@
-﻿// Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
-
+﻿// Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
-// 17 -> такого числа в массиве нет
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
 static int RandomNumber()
 {
@@ -32,10 +31,14 @@ int collumns = RandomNumber();
 int[,] arr = new int[rows, collumns];
 MakeMatrix(arr, rows, collumns); // Создание матрицы
 
-int rowNumber = 3; // Задание строки
-int collNumber = 4; // Задание столбца
-
-if(rowNumber < rows & collNumber < collumns)
-	System.Console.WriteLine(arr[rowNumber, collNumber]);
-else
-	System.Console.WriteLine($"{rowNumber}, {collNumber} -> Такого числа нет.");
+System.Console.Write("Среднее арифметическое каждого столбца: ");
+for (int j = 0; j < collumns; j++)
+{
+	int sum = 0;
+	for(int i = 0; i < rows; i++)
+	{
+		sum +=arr[i, j];
+	}
+	double average = (sum/rows);
+	System.Console.Write($" {average};");
+}
