@@ -1,58 +1,41 @@
-﻿// Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// Например, даны 2 матрицы:
-// 2 4 | 3 4
-// 3 2 | 3 3
-// Результирующая матрица будет:
-// 18 20
-// 15 18
-static int RandomNumber() // Генератор случайных чисел
+﻿// Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+// Массив размером 2 x 2 x 2
+// 66(0,0,0) 25(0,1,0)
+// 34(1,0,0) 41(1,1,0)
+// 27(0,0,1) 90(0,1,1)
+// 26(1,0,1) 55(1,1,1)
+int[,,] CreateMatrix (int row, int col, int dep, int min, int max) 
 {
-	Random rnd = new Random();
-	return rnd.Next(1, 10);
-}
-
-int[,] MakeMatrix(int[,] matrix, int m, int n) // Создание матрицы
-{
-	for(int i = 0; i < m; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{	
-			matrix[i, j] = RandomNumber();
-		}
-	}
-	return matrix;
-}
-
-void PrintTable(int[,] matrix, int m, int n) //Печать матрицы
-{
-    for(int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {	
-               System.Console.Write(matrix[i, j] + "\t");
-            }
-            System.Console.WriteLine();
-        }
-}
-
-int rows = RandomNumber(); // Число строк
-int collumns = RandomNumber(); // Число столбцов
-int[,] table1 = new int[rows, collumns]; // Массив под матрицу
-int[,] table2 = new int[rows, collumns];
-int[,] result = new int[rows, collumns];
-
-MakeMatrix(table1, rows, collumns); // Создание матрицы
-MakeMatrix(table2, rows, collumns); // Создание матрицы
-PrintTable(table1, rows, collumns);
-System.Console.WriteLine("--------------------");
-PrintTable(table2, rows, collumns);
-
-for(int i = 0; i < rows; i++)
-{
-    for(int j = 0; j < collumns; j++)
+    int[,,] matrix = new int[row, col, dep];
+    Random rnd = new Random();   
+    for (int i = 0; i < matrix.GetLength(0); i++) 
     {
-        result[i, j] = table1[i, j] * table2[i, j];
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            for (int k = 0; k < matrix.GetLength(2); k++)
+                {
+                    matrix[i,j,k] = rnd.Next(min, max + 1);
+                }
+        }
     }
+    return matrix;
+} 
+ 
+void PrintMatrix(int[,,] matrix)
+{
+    for (int i = 0; i <  matrix.GetLength(0); i++)
+    {
+        Console.Write("|");
+        for (int j = 0; j < matrix.GetLength(1); j++) 
+        {
+            for (int k = 0; k < matrix.GetLength(2); k++)
+            {
+            Console.Write($"{matrix[i, j, k]}({i},{j},{k})|");            
+            }
+        }
+        Console.WriteLine();        
+    }        
 }
-System.Console.WriteLine("Произведение двух матриц:");
-PrintTable(result, rows, collumns);
+ 
+int[,,] array3D = CreateMatrix(2, 2, 2, 10, 99);
+PrintMatrix(array3D);
