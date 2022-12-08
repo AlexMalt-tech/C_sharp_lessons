@@ -1,44 +1,67 @@
-﻿// Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+﻿// Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
-// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
-
-static int RandomNumber()
+// В итоге получается вот такой массив:
+// 7 4 2 1
+// 9 5 3 2
+// 8 4 4 2
+static int RandomNumber() // Генератор случайных чисел
 {
 	Random rnd = new Random();
-	return rnd.Next(0, 10);
+	return rnd.Next(1, 10);
 }
 
-int[,] MakeMatrix(int[,] matrix, int m, int n)
+int[,] MakeMatrix(int[,] matrix, int m, int n) // Создание матрицы
 {
-	
 	for(int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{	
 			matrix[i, j] = RandomNumber();
-			System.Console.Write($"{matrix[i, j]} ");
 		}
-		System.Console.WriteLine();
 	}
 	return matrix;
 }
 
-int rows = RandomNumber();
-int collumns = RandomNumber();
-int[,] arr = new int[rows, collumns];
-MakeMatrix(arr, rows, collumns); // Создание матрицы
-
-System.Console.Write("Среднее арифметическое каждого столбца: ");
-for (int j = 0; j < collumns; j++)
+void PrintTable(int[,] matrix, int m, int n) //Печать матрицы
 {
-	int sum = 0;
-	for(int i = 0; i < rows; i++)
-	{
-		sum +=arr[i, j];
-	}
-	double average = (sum/rows);
-	System.Console.Write($" {average};");
+    for(int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {	
+               System.Console.Write($"{matrix[i, j]} ");
+            }
+            System.Console.WriteLine();
+        }
 }
+
+int rows = RandomNumber(); // Число строк
+int collumns = RandomNumber(); // Число столбцов
+int[,] table = new int[rows, collumns]; // Массив под матрицу
+int[,] tableReverse = new int[rows, collumns]; // Перевернутый массив
+MakeMatrix(table, rows, collumns); // Создание матрицы
+PrintTable(table, rows, collumns);
+System.Console.WriteLine("--------------");
+for(int i = 0; i < rows; i++)
+{
+    int[] arr = new int[collumns];
+
+    for(int el = 0; el < collumns; el++)
+        {
+            arr[el] = table[i, el];
+        }
+
+    Array.Sort(arr);
+    Array.Reverse(arr);  
+    for(int el = 0; el < collumns; el++)
+        {
+            tableReverse[i, el] = arr[el];
+        }
+}
+PrintTable(tableReverse, rows, collumns);
+
+
+
+
