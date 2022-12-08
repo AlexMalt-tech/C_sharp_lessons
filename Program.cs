@@ -1,10 +1,10 @@
-﻿// Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-// Например, задан массив:
-// 1 4 7 2
-// 5 9 2 3
-// 8 4 2 4
-// 5 2 6 7
-// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+﻿// Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
 static int RandomNumber() // Генератор случайных чисел
 {
 	Random rnd = new Random();
@@ -29,32 +29,30 @@ void PrintTable(int[,] matrix, int m, int n) //Печать матрицы
         {
             for (int j = 0; j < n; j++)
             {	
-               System.Console.Write($"{matrix[i, j]} ");
+               System.Console.Write(matrix[i, j] + "\t");
             }
             System.Console.WriteLine();
         }
 }
 
 int rows = RandomNumber(); // Число строк
-int collumns = rows; // Число столбцов
-int[,] table = new int[rows, collumns]; // Массив под матрицу
-int[] rowSum = new int[rows];
+int collumns = RandomNumber(); // Число столбцов
+int[,] table1 = new int[rows, collumns]; // Массив под матрицу
+int[,] table2 = new int[rows, collumns];
+int[,] result = new int[rows, collumns];
 
-MakeMatrix(table, rows, collumns); // Создание матрицы
-PrintTable(table, rows, collumns);
+MakeMatrix(table1, rows, collumns); // Создание матрицы
+MakeMatrix(table2, rows, collumns); // Создание матрицы
+PrintTable(table1, rows, collumns);
 System.Console.WriteLine("--------------------");
+PrintTable(table2, rows, collumns);
 
-for (int i = 0; i < rows; i++)
+for(int i = 0; i < rows; i++)
 {
-    for (int j = 0; j < collumns; j++)
+    for(int j = 0; j < collumns; j++)
     {
-        rowSum[i] += table[i, j];
+        result[i, j] = table1[i, j] * table2[i, j];
     }
 }
-
-System.Console.WriteLine("Строка с наименьшей суммой элементов: " + Array.IndexOf(rowSum, rowSum.Min()));
-
-
-
-
-
+System.Console.WriteLine("Произведение двух матриц:");
+PrintTable(result, rows, collumns);
