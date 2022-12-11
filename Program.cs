@@ -1,13 +1,15 @@
-﻿// Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
-// M = 1; N = 15 -> 120
-// M = 4; N = 8. -> 30
+﻿// Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.
 
-int num1 = 1, num2 = 15;
+// N = 5 -> "5, 4, 3, 2, 1"
+// N = 8 -> "8, 7, 6, 5, 4, 3, 2, 1"
 
-int SumNum (int num, int stop)
+int PrintLine(int num)
 {
-	if (num > stop) return 0;
-	return num + SumNum(num + 1, stop);
+	if(num == 0) return 0;
+	System.Console.Write(num + ", ");
+	return PrintLine(num - 1);
 }
 
-System.Console.WriteLine(SumNum(num1, num2));
+int n = 8;
+System.Console.Write($"N = {n} -> ");
+PrintLine(n);
